@@ -1,0 +1,1315 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFYNION - Premium Digital Agency</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&amp;family=Rajdhani:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12141d;
+      --surface: #1a1c2e;
+      --neon-blue: #00d4ff;
+      --neon-cyan: #00ffcc;
+      --neon-purple: #8b5cf6;
+      --text-white: #ffffff;
+      --glass-bg: rgba(26, 28, 46, 0.6);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-white);
+      overflow-x: hidden;
+    }
+    
+    .font-orbitron {
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    /* Particle Background */
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    /* Glassmorphism */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 212, 255, 0.1);
+    }
+    
+    .glass-card {
+      background: linear-gradient(135deg, rgba(26, 28, 46, 0.8) 0%, rgba(18, 20, 29, 0.9) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 20px;
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(0, 212, 255, 0.5);
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.3), inset 0 0 60px rgba(0, 212, 255, 0.05);
+      transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+    }
+    
+    /* Neon Glow Effects */
+    .neon-glow {
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(0, 212, 255, 0.3), 0 0 60px rgba(0, 212, 255, 0.1);
+    }
+    
+    .neon-text {
+      text-shadow: 0 0 10px rgba(0, 212, 255, 0.8), 0 0 20px rgba(0, 212, 255, 0.6), 0 0 40px rgba(0, 212, 255, 0.4);
+    }
+    
+    .neon-border {
+      border: 2px solid transparent;
+      background: linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+                  linear-gradient(135deg, var(--neon-blue), var(--neon-cyan), var(--neon-purple)) border-box;
+    }
+    
+    /* Buttons */
+    .btn-neon {
+      position: relative;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 255, 204, 0.1) 100%);
+      border: 2px solid var(--neon-blue);
+      border-radius: 50px;
+      color: var(--text-white);
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .btn-neon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.4), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .btn-neon:hover::before {
+      left: 100%;
+    }
+    
+    .btn-neon:hover {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.3) 0%, rgba(0, 255, 204, 0.3) 100%);
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.6), 0 0 60px rgba(0, 212, 255, 0.3);
+      transform: translateY(-3px);
+    }
+    
+    /* Hero Title Animation */
+    .hero-title {
+      font-size: clamp(3rem, 12vw, 10rem);
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 50%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+      text-shadow: none;
+    }
+    
+    @keyframes titleGlow {
+      0% {
+        filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.3));
+      }
+      100% {
+        filter: drop-shadow(0 0 40px rgba(0, 212, 255, 0.6));
+      }
+    }
+    
+    /* Infinity Logo */
+    .infinity-container {
+      width: 200px;
+      height: 100px;
+      position: relative;
+      margin: 40px auto;
+    }
+    
+    .infinity-svg {
+      width: 100%;
+      height: 100%;
+      animation: infinityFloat 4s ease-in-out infinite;
+    }
+    
+    .infinity-path {
+      fill: none;
+      stroke: url(#neonGradient);
+      stroke-width: 4;
+      stroke-linecap: round;
+      filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.8)) drop-shadow(0 0 20px rgba(0, 255, 204, 0.6));
+      stroke-dasharray: 500;
+      animation: infinityDraw 3s ease-in-out infinite;
+    }
+    
+    @keyframes infinityFloat {
+      0%, 100% { transform: translateY(0) rotateX(0deg); }
+      50% { transform: translateY(-15px) rotateX(10deg); }
+    }
+    
+    @keyframes infinityDraw {
+      0% { stroke-dashoffset: 500; }
+      50% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -500; }
+    }
+    
+    /* Section Animations */
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .section-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Service Cards */
+    .service-card {
+      position: relative;
+      padding: 40px 30px;
+      background: linear-gradient(145deg, rgba(26, 28, 46, 0.9) 0%, rgba(10, 10, 15, 0.95) 100%);
+      border-radius: 24px;
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform-style: preserve-3d;
+    }
+    
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan), var(--neon-purple));
+      transform: scaleX(0);
+      transition: transform 0.5s ease;
+    }
+    
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .service-card:hover {
+      transform: translateY(-15px) rotateX(10deg);
+      border-color: rgba(0, 212, 255, 0.4);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 212, 255, 0.2);
+    }
+    
+    .service-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 255, 204, 0.1) 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      transition: all 0.4s ease;
+    }
+    
+    .service-card:hover .service-icon {
+      transform: scale(1.1) rotateZ(5deg);
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+    }
+    
+    /* Team Cards */
+    .team-card {
+      position: relative;
+      background: linear-gradient(145deg, rgba(26, 28, 46, 0.8) 0%, rgba(10, 10, 15, 0.9) 100%);
+      border-radius: 24px;
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      overflow: hidden;
+      transition: all 0.5s ease;
+      transform-style: preserve-3d;
+    }
+    
+    .team-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: rgba(0, 212, 255, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 212, 255, 0.2);
+    }
+    
+    .team-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-cyan));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 30px auto 20px;
+      border: 3px solid rgba(0, 212, 255, 0.3);
+      transition: all 0.4s ease;
+      overflow: hidden;
+    }
+    
+    .team-card:hover .team-avatar {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
+    }
+    
+    /* Navigation */
+    .nav-link {
+      position: relative;
+      color: var(--text-white);
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 1px;
+      padding: 8px 0;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan));
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .nav-link:hover {
+      color: var(--neon-cyan);
+    }
+    
+    /* Map Container */
+    .map-container {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 2px solid rgba(0, 212, 255, 0.2);
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.1);
+    }
+    
+    /* Contact Form */
+    .form-input {
+      width: 100%;
+      padding: 18px 24px;
+      background: rgba(26, 28, 46, 0.8);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 16px;
+      color: var(--text-white);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+    
+    .form-input:focus {
+      border-color: var(--neon-blue);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    }
+    
+    .form-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    
+    /* Floating Elements */
+    .floating {
+      animation: floating 6s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-15px) rotate(2deg); }
+      66% { transform: translateY(-8px) rotate(-2deg); }
+    }
+    
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-20px); }
+      60% { transform: translateX(-50%) translateY(-10px); }
+    }
+    
+    /* Gradient Overlays */
+    .gradient-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at center top, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                  radial-gradient(ellipse at center bottom, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    
+    /* Section Titles */
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+    
+    .section-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.05em;
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 400px;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(10, 10, 15, 0.98) 0%, rgba(18, 20, 29, 0.98) 100%);
+      backdrop-filter: blur(20px);
+      z-index: 1001;
+      transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      padding: 100px 40px;
+      border-left: 1px solid rgba(0, 212, 255, 0.2);
+    }
+    
+    .mobile-menu.open {
+      right: 0;
+    }
+    
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .menu-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    /* Hamburger */
+    .hamburger {
+      width: 30px;
+      height: 24px;
+      position: relative;
+      cursor: pointer;
+      z-index: 1002;
+    }
+    
+    .hamburger span {
+      display: block;
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background: var(--text-white);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    .hamburger span:nth-child(1) { top: 0; }
+    .hamburger span:nth-child(2) { top: 11px; }
+    .hamburger span:nth-child(3) { bottom: 0; }
+    
+    .hamburger.open span:nth-child(1) {
+      transform: rotate(45deg);
+      top: 11px;
+    }
+    
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg);
+      bottom: 11px;
+    }
+    
+    /* Social Icons */
+    .social-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(26, 28, 46, 0.8);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+    
+    .social-icon:hover {
+      background: rgba(0, 212, 255, 0.2);
+      border-color: var(--neon-blue);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+    }
+    
+    /* Parallax sections */
+    .parallax-section {
+      position: relative;
+      transform-style: preserve-3d;
+    }
+    
+    /* Location Pin Animation */
+    .location-pin {
+      animation: pinPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pinPulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5)); }
+      50% { transform: scale(1.1); filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8)); }
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .service-card, .glass-card, .team-card {
+        transform: none !important;
+      }
+      
+      .service-card:hover, .glass-card:hover, .team-card:hover {
+        transform: translateY(-5px) !important;
+      }
+      
+      .btn-neon {
+        padding: 12px 24px;
+        font-size: 12px;
+      }
+      
+      .infinity-container {
+        width: 150px;
+        height: 75px;
+      }
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--neon-blue), var(--neon-cyan));
+      border-radius: 4px;
+    }
+    
+    /* Stagger animations */
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+    .stagger-5 { animation-delay: 0.5s; }
+    .stagger-6 { animation-delay: 0.6s; }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full"><!-- Particle Canvas -->
+  <canvas id="particles-canvas"></canvas><!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 glass">
+   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"><a href="#hero" class="font-orbitron text-xl font-bold tracking-wider" id="nav-logo">INFYNION</a> <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center gap-8"><a href="#about" class="nav-link">About</a> <a href="#services" class="nav-link">Services</a> <a href="#team" class="nav-link">Team</a> <a href="#location" class="nav-link">Location</a> <a href="#contact" class="nav-link">Contact</a>
+    </div><!-- Mobile Hamburger -->
+    <div class="hamburger md:hidden" id="hamburger"><span></span> <span></span> <span></span>
+    </div>
+   </div>
+  </nav><!-- Mobile Menu -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+   <div class="flex flex-col gap-8"><a href="#about" class="nav-link text-2xl">About</a> <a href="#services" class="nav-link text-2xl">Services</a> <a href="#team" class="nav-link text-2xl">Team</a> <a href="#location" class="nav-link text-2xl">Location</a> <a href="#contact" class="nav-link text-2xl">Contact</a>
+   </div>
+  </div><!-- Hero Section -->
+  <section id="hero" class="min-h-screen relative flex flex-col items-center justify-center px-6 overflow-hidden">
+   <div class="gradient-overlay"></div>
+   <div class="relative z-10 text-center">
+    <h1 class="hero-title font-orbitron" id="hero-title">INFYNION</h1><!-- Infinity Logo -->
+    <div class="infinity-container">
+     <svg class="infinity-svg" viewbox="0 0 200 100"><defs>
+       <lineargradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#00d4ff" />
+        <stop offset="50%" style="stop-color:#00ffcc" />
+        <stop offset="100%" style="stop-color:#8b5cf6" />
+       </lineargradient>
+      </defs> <path class="infinity-path" d="M50,50 C50,20 80,20 100,50 C120,80 150,80 150,50 C150,20 120,20 100,50 C80,80 50,80 50,50" />
+     </svg>
+    </div>
+    <p class="text-xl md:text-2xl tracking-widest mb-12 opacity-90" id="hero-tagline">Visionary • Dynamic • Infinite</p><!-- CTA Buttons -->
+    <div class="flex flex-wrap justify-center gap-4 md:gap-6"><a href="tel:7736038860" class="btn-neon">
+      <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+      </svg> Call Now </a> <a href="#location" class="btn-neon">
+      <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /> <circle cx="12" cy="10" r="3" />
+      </svg> Get Directions </a> <a href="#contact" class="btn-neon">
+      <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /> <polyline points="22,6 12,13 2,6" />
+      </svg> Contact Us </a>
+    </div>
+   </div><!-- Scroll Indicator -->
+   <div class="scroll-indicator">
+    <svg width="30" height="50" viewbox="0 0 30 50"><rect x="1" y="1" width="28" height="48" rx="14" fill="none" stroke="rgba(0,212,255,0.5)" stroke-width="2" /> <circle cx="15" cy="15" r="4" fill="#00d4ff">
+      <animate attributename="cy" from="15" to="35" dur="1.5s" repeatcount="indefinite" />
+      <animate attributename="opacity" from="1" to="0" dur="1.5s" repeatcount="indefinite" />
+     </circle>
+    </svg>
+   </div>
+  </section><!-- About Section -->
+  <section id="about" class="py-24 px-6 relative parallax-section">
+   <div class="gradient-overlay"></div>
+   <div class="max-w-6xl mx-auto relative z-10">
+    <div class="section-reveal text-center mb-16">
+     <h2 class="section-title" id="about-title">About INFYNION</h2>
+     <div class="w-24 h-1 mx-auto bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full mb-8"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+     <div class="section-reveal glass-card p-8 md:p-12">
+      <p class="text-lg md:text-xl leading-relaxed opacity-90" id="about-description">We are a premium digital agency specializing in crafting exceptional brand experiences. Our team of visionary designers and strategists transforms ideas into stunning visual realities that captivate audiences and drive results.</p>
+      <p class="text-lg md:text-xl leading-relaxed opacity-90 mt-6">With cutting-edge creativity and meticulous attention to detail, we deliver solutions that transcend ordinary design. From brand identity to digital experiences, we shape the future of visual communication.</p>
+     </div>
+     <div class="section-reveal floating">
+      <svg viewbox="0 0 400 400" class="w-full max-w-md mx-auto"><defs>
+        <lineargradient id="cubeGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+         <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.3" />
+         <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.1" />
+        </lineargradient>
+        <lineargradient id="cubeGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+         <stop offset="0%" style="stop-color:#00ffcc;stop-opacity:0.4" />
+         <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:0.2" />
+        </lineargradient>
+       </defs> <!-- 3D Cube Illustration --> <g transform="translate(200,200)">
+        <polygon points="-80,-60 80,-60 120,0 40,60 -120,60 -80,-60" fill="url(#cubeGradient1)" stroke="#00d4ff" stroke-width="2" />
+        <polygon points="80,-60 120,0 120,80 80,20 80,-60" fill="url(#cubeGradient2)" stroke="#00d4ff" stroke-width="2" />
+        <polygon points="-80,-60 -80,20 -120,60 -120,-20 -80,-60" fill="rgba(0,212,255,0.15)" stroke="#00d4ff" stroke-width="2" />
+        <polygon points="-80,20 80,20 120,80 40,140 -120,140 -120,60 -80,20" fill="rgba(0,212,255,0.1)" stroke="#00d4ff" stroke-width="2" />
+       </g> <!-- Floating particles --> <circle cx="100" cy="100" r="4" fill="#00d4ff" opacity="0.6">
+        <animate attributename="cy" values="100;80;100" dur="3s" repeatcount="indefinite" />
+       </circle> <circle cx="300" cy="150" r="3" fill="#00ffcc" opacity="0.5">
+        <animate attributename="cy" values="150;130;150" dur="2.5s" repeatcount="indefinite" />
+       </circle> <circle cx="350" cy="300" r="5" fill="#8b5cf6" opacity="0.4">
+        <animate attributename="cy" values="300;280;300" dur="4s" repeatcount="indefinite" />
+       </circle>
+      </svg>
+     </div>
+    </div>
+   </div>
+  </section><!-- Services Section -->
+  <section id="services" class="py-24 px-6 relative">
+   <div class="gradient-overlay"></div>
+   <div class="max-w-7xl mx-auto relative z-10">
+    <div class="section-reveal text-center mb-16">
+     <h2 class="section-title">Our Services</h2>
+     <p class="section-subtitle">Premium design solutions for your brand</p>
+     <div class="w-24 h-1 mx-auto bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full mt-6"></div>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"><!-- Service 1 -->
+     <div class="section-reveal service-card stagger-1">
+      <div class="service-icon">
+       <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" /> <line x1="3" y1="9" x2="21" y2="9" /> <line x1="9" y1="21" x2="9" y2="9" />
+       </svg>
+      </div>
+      <h3 class="font-orbitron text-lg font-semibold mb-3">Poster &amp; Banner Design</h3>
+      <p class="text-sm opacity-70">Eye-catching promotional materials that demand attention</p>
+     </div><!-- Service 2 -->
+     <div class="section-reveal service-card stagger-2">
+      <div class="service-icon">
+       <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#00ffcc" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+       </svg>
+      </div>
+      <h3 class="font-orbitron text-lg font-semibold mb-3">Social Media Design</h3>
+      <p class="text-sm opacity-70">Engaging content that builds your online presence</p>
+     </div><!-- Service 3 -->
+     <div class="section-reveal service-card stagger-3">
+      <div class="service-icon">
+       <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><circle cx="12" cy="12" r="10" /> <path d="M12 6v6l4 2" />
+       </svg>
+      </div>
+      <h3 class="font-orbitron text-lg font-semibold mb-3">Brand &amp; Logo Design</h3>
+      <p class="text-sm opacity-70">Distinctive identities that define your brand</p>
+     </div><!-- Service 4 -->
+     <div class="section-reveal service-card stagger-4">
+      <div class="service-icon">
+       <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" /> <line x1="8" y1="21" x2="16" y2="21" /> <line x1="12" y1="17" x2="12" y2="21" />
+       </svg>
+      </div>
+      <h3 class="font-orbitron text-lg font-semibold mb-3">Presentation Design</h3>
+      <p class="text-sm opacity-70">Compelling slides that tell your story</p>
+     </div><!-- Service 5 -->
+     <div class="section-reveal service-card stagger-5">
+      <div class="service-icon">
+       <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#00ffcc" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z" /> <path d="M2 17l10 5 10-5" /> <path d="M2 12l10 5 10-5" />
+       </svg>
+      </div>
+      <h3 class="font-orbitron text-lg font-semibold mb-3">Website &amp; UI Design</h3>
+      <p class="text-sm opacity-70">Digital experiences that convert visitors</p>
+     </div><!-- Service 6 -->
+     <div class="section-reveal service-card stagger-1">
+      <div class="service-icon">
+       <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7" /> <rect x="1" y="5" width="15" height="14" rx="2" />
+       </svg>
+      </div>
+      <h3 class="font-orbitron text-lg font-semibold mb-3">Video Editing</h3>
+      <p class="text-sm opacity-70">Cinematic content that captivates audiences</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- CEO Section -->
+  <section id="team" class="py-16 px-6 relative">
+   <div class="gradient-overlay"></div>
+   <div class="max-w-5xl mx-auto relative z-10">
+    <div class="section-reveal text-center mb-12">
+     <h2 class="section-title text-3xl md:text-4xl">Message from Our CEO</h2>
+     <p class="section-subtitle text-base">Leading innovation with vision and purpose</p>
+     <div class="w-20 h-1 mx-auto bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full mt-4"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6 items-center"><!-- CEO Image -->
+     <div class="section-reveal">
+      <div class="glass-card p-6">
+       <div class="ceo-image-container relative aspect-square max-w-xs mx-auto overflow-hidden rounded-2xl border-2 border-cyan-500/30"><!-- Placeholder for CEO image -->
+        <div class="w-full h-full bg-gradient-to-br from-cyan-500/20 via-blue-500/10 to-purple-500/20 flex items-center justify-center">
+         <img src="ceo.jpg" alt="CEO Photo" class="w-full h-full object-cover rounded-2xl"/>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+       </div>
+       <div class="text-center mt-4">
+        <h3 class="font-orbitron text-xl font-bold" id="ceo-name">John Anderson</h3>
+        <p class="text-cyan-400 mt-1 tracking-wider text-sm">Founder &amp; CEO</p>
+       </div>
+      </div>
+     </div><!-- CEO Message -->
+     <div class="section-reveal">
+      <div class="glass-card p-6 h-full flex flex-col justify-center">
+       <div class="mb-4">
+        <svg width="32" height="32" viewbox="0 0 24 24" fill="none" class="opacity-30"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" fill="url(#quoteGradient)" /> <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" fill="url(#quoteGradient)" /> <defs>
+          <lineargradient id="quoteGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+           <stop offset="0%" style="stop-color:#00d4ff" />
+           <stop offset="100%" style="stop-color:#00ffcc" />
+          </lineargradient>
+         </defs>
+        </svg>
+       </div>
+       <p class="text-base md:text-lg leading-relaxed mb-4 opacity-90" id="ceo-message">At INFYNION, we believe in the power of design to transform businesses and create lasting impact. Our commitment to excellence and innovation drives us to deliver solutions that not only meet but exceed expectations. We're not just creating designs—we're crafting experiences that inspire and connect.</p>
+       <div class="flex items-center gap-4 pt-4 border-t border-cyan-500/20">
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
+        <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z" /> <path d="M2 17l10 5 10-5" /> <path d="M2 12l10 5 10-5" />
+        </svg>
+        <div class="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Team Members Section -->
+  <section id="team-members" class="py-24 px-6 relative">
+   <div class="gradient-overlay"></div>
+   <div class="max-w-7xl mx-auto relative z-10">
+    <div class="section-reveal text-center mb-16">
+     <h2 class="section-title">Our Team</h2>
+     <p class="section-subtitle">Meet the creative minds behind INFYNION</p>
+     <div class="w-24 h-1 mx-auto bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full mt-6"></div>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"><!-- Team Member 1 -->
+     <div class="section-reveal team-card stagger-1">
+      <div class="team-avatar">
+       <svg width="50" height="50" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /> <circle cx="12" cy="7" r="4" />
+       </svg>
+      </div>
+      <div class="px-6 pb-8 text-center">
+       <h3 class="font-orbitron text-lg font-semibold mb-2" id="team1-name">ARFAN T S</h3>
+       <p class="text-cyan-400 text-sm mb-3" id="team1-role">Creative Director</p>
+       <p class="text-xs opacity-70" id="team1-description">Leading the creative vision with 10+ years of experience</p>
+      </div>
+     </div><!-- Team Member 2 -->
+     <div class="section-reveal team-card stagger-2">
+      <div class="team-avatar" style="background: linear-gradient(135deg, #00ffcc, #8b5cf6);">
+       <svg width="50" height="50" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /> <circle cx="12" cy="7" r="4" />
+       </svg>
+      </div>
+      <div class="px-6 pb-8 text-center">
+       <h3 class="font-orbitron text-lg font-semibold mb-2" id="team2-name">Vacant</h3>
+       <p class="text-cyan-400 text-sm mb-3" id="team2-role">Lead Designer</p>
+       <p class="text-xs opacity-70" id="team2-description">Crafting pixel-perfect designs that inspire</p>
+      </div>
+     </div><!-- Team Member 3 -->
+     <div class="section-reveal team-card stagger-3">
+      <div class="team-avatar" style="background: linear-gradient(135deg, #8b5cf6, #00d4ff);">
+       <svg width="50" height="50" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /> <circle cx="12" cy="7" r="4" />
+       </svg>
+      </div>
+      <div class="px-6 pb-8 text-center">
+       <h3 class="font-orbitron text-lg font-semibold mb-2" id="team3-name">Vacant</h3>
+       <p class="text-cyan-400 text-sm mb-3" id="team3-role">Brand Strategist</p>
+       <p class="text-xs opacity-70" id="team3-description">Building brands that resonate and convert</p>
+      </div>
+     </div><!-- Team Member 4 -->
+     <div class="section-reveal team-card stagger-4">
+      <div class="team-avatar" style="background: linear-gradient(135deg, #00d4ff, #00ffcc);">
+       <svg width="50" height="50" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /> <circle cx="12" cy="7" r="4" />
+       </svg>
+      </div>
+      <div class="px-6 pb-8 text-center">
+       <h3 class="font-orbitron text-lg font-semibold mb-2" id="team4-name">Aadhya</h3>
+       <p class="text-cyan-400 text-sm mb-3" id="team4-role">Editor</p>
+       <p class="text-xs opacity-70" id="team4-description">Creating cinematic content that tells stories</p>
+      </div>
+     </div><!-- Team Member 5 -->
+     <div class="section-reveal team-card stagger-5">
+      <div class="team-avatar" style="background: linear-gradient(135deg, #00ffcc, #00d4ff);">
+       <svg width="50" height="50" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /> <circle cx="12" cy="7" r="4" />
+       </svg>
+      </div>
+      <div class="px-6 pb-8 text-center">
+       <h3 class="font-orbitron text-lg font-semibold mb-2" id="team5-name">Vacant</h3>
+       <p class="text-cyan-400 text-sm mb-3" id="team5-role">UI/UX Designer</p>
+       <p class="text-xs opacity-70" id="team5-description">Designing intuitive digital experiences</p>
+      </div>
+     </div><!-- Team Member 6 -->
+     <div class="section-reveal team-card stagger-6">
+      <div class="team-avatar" style="background: linear-gradient(135deg, #8b5cf6, #00ffcc);">
+       <svg width="50" height="50" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /> <circle cx="12" cy="7" r="4" />
+       </svg>
+      </div>
+      <div class="px-6 pb-8 text-center">
+       <h3 class="font-orbitron text-lg font-semibold mb-2" id="team6-name">Vacant</h3>
+       <p class="text-cyan-400 text-sm mb-3" id="team6-role">Motion Designer</p>
+       <p class="text-xs opacity-70" id="team6-description">Bringing designs to life with animation</p>
+      </div>
+      
+     </div>
+    </div>
+   </div>s
+  </section><!-- Location Section -->
+  <section id="location" class="py-24 px-6 relative">
+   <div class="gradient-overlay"></div>
+   <div class="max-w-6xl mx-auto relative z-10">
+    <div class="section-reveal text-center mb-16">
+     <h2 class="section-title">Find Us</h2>
+     <p class="section-subtitle">Visit our creative studio</p>
+     <div class="w-24 h-1 mx-auto bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full mt-6"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+     <div class="section-reveal">
+      <div class="map-container h-80 md:h-96"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3946.. !2d76.. !3d8.. !2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05babdbabc7c27%3A0x9570e4e3c7d40e83!2sOld%20Karakkamandapam%2C%20Nemom%2C%20Kerala%20695020!5e0!3m2!1sen!2sin!4v. !5m2!1sen!2sin" width="100%" height="100%" style="border:0; filter: invert(90%) hue-rotate(180deg);" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"> </iframe>
+      </div>
+     </div>
+     <div class="section-reveal glass-card p-8 text-center">
+      <div class="location-pin mx-auto mb-6">
+       <svg width="60" height="60" viewbox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" fill="url(#pinGradient)" stroke="#00d4ff" stroke-width="2" /> <circle cx="12" cy="10" r="3" fill="#0a0a0f" /> <defs>
+         <lineargradient id="pinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#00d4ff" />
+          <stop offset="100%" style="stop-color:#00ffcc" />
+         </lineargradient>
+        </defs>
+       </svg>
+      </div>
+      <h3 class="font-orbitron text-xl font-semibold mb-4">INFYNION Studio</h3>
+      <p class="opacity-80 mb-2">Old Karakkamandapam</p>
+      <p class="opacity-80 mb-6">Nemom, Kerala 695020</p><a href="https://maps.app.goo.gl/tmFb6SS2Y9uG64NN6" target="_blank" rel="noopener noreferrer" class="btn-neon inline-flex">
+       <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /> <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+       </svg> Get Directions </a>
+     </div>
+    </div>
+   </div>
+  </section><!-- Contact Section -->
+  <section id="contact" class="py-24 px-6 relative">
+   <div class="gradient-overlay"></div>
+   <div class="max-w-4xl mx-auto relative z-10">
+    <div class="section-reveal text-center mb-16">
+     <h2 class="section-title">Get In Touch</h2>
+     <p class="section-subtitle">Let's create something amazing together</p>
+     <div class="w-24 h-1 mx-auto bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full mt-6"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8"><!-- Contact Info -->
+     <div class="section-reveal">
+      <div class="glass-card p-8 h-full">
+       <h3 class="font-orbitron text-xl font-semibold mb-8">Contact Info</h3>
+       <div class="space-y-6"><a href="tel:7736038860" class="flex items-center gap-4 group">
+         <div class="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 flex items-center justify-center border border-cyan-500/30 group-hover:border-cyan-400 transition-all">
+          <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+         </div><span id="contact-phone" class="group-hover:text-cyan-400 transition-colors">+1 (555) 123-4567</span> </a> <a href="mailto:infynion01@gmail.com" class="flex items-center gap-4 group">
+         <div class="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 flex items-center justify-center border border-cyan-500/30 group-hover:border-cyan-400 transition-all">
+          <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /> <polyline points="22,6 12,13 2,6" />
+          </svg>
+         </div><span id="contact-email" class="group-hover:text-cyan-400 transition-colors">infynion01@gmail.com</span> </a> <a href="https://instagram.com/_infynion_" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 group">
+         <div class="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 flex items-center justify-center border border-cyan-500/30 group-hover:border-purple-400 transition-all">
+          <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /> <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /> <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+          </svg>
+         </div><span id="instagram-handle" class="group-hover:text-purple-400 transition-colors">@_infynion_</span> </a>
+       </div>
+      </div>
+     </div><!-- Contact Form -->
+<div class="section-reveal">
+  <form class="glass-card p-8" id="contactForm">
+    <h3 class="font-orbitron text-xl font-semibold mb-8">Send Message</h3>
+    <div class="space-y-5">
+      <div>
+        <label for="name" class="block text-sm mb-2 opacity-80">Your Name</label>
+        <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required>
+      </div>
+      <div>
+        <label for="email" class="block text-sm mb-2 opacity-80">Email Address</label>
+        <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required>
+      </div>
+      <div>
+        <label for="message" class="block text-sm mb-2 opacity-80">Message</label>
+        <textarea id="message" name="message" rows="4" class="form-input resize-none" placeholder="Tell us about your project..." required></textarea>
+      </div>
+      <button type="submit" class="btn-neon w-full justify-center">
+        <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="22" y1="2" x2="11" y2="13" />
+          <polygon points="22 2 15 22 11 13 2 9 22 2" />
+        </svg> Send Message
+      </button>
+    </div>
+  </form>
+</div>
+    
+    </div>
+   </div>
+  </section><!-- Footer -->
+  <footer class="py-12 px-6 border-t border-cyan-500/10 relative">
+   <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+     <div class="text-center md:text-left">
+      <h3 class="font-orbitron text-2xl font-bold mb-2">INFYNION</h3>
+      <p class="text-sm opacity-60">Visionary • Dynamic • Infinite</p>
+     </div>
+     <div class="flex items-center gap-4"><a href="https://instagram.com/_infynion_" target="_blank" rel="noopener noreferrer" class="social-icon">
+       <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /> <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /> <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+       </svg></a> <a href="https://twitr.com/infynion" target="_blank" rel="noopener noreferrer" class="social-icon">
+       <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+       </svg></a> <a href="https://linkedi.com/company/infynin" target="_blank" rel="noopener noreferrer" class="social-icon">
+       <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /> <rect x="2" y="9" width="4" height="12" /> <circle cx="4" cy="4" r="2" />
+       </svg></a> <a href="https://dribbble.com/infynion" target="_blank" rel="noopener noreferrer" class="social-icon">
+       <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2"><circle cx="12" cy="12" r="10" /> <path d="M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94" /> <path d="M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32" /> <path d="M8.56 2.75c4.37 6 6 9.42 8 17.72" />
+       </svg></a>
+     </div>
+     <div class="text-center md:text-right">
+      <p class="text-sm opacity-60">© 2026 INFYNION. All rights reserved.</p>
+     </div>
+    </div>
+   </div>
+  </footer><!-- Success Toast -->
+  <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 glass px-8 py-4 rounded-full opacity-0 transition-all duration-500 pointer-events-none z-50">
+   <p class="font-orbitron text-sm">✨ Message sent successfully!</p>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      hero_title: 'INFYNION',
+      hero_tagline: 'Visionary • Dynamic • Infinite',
+      about_title: 'About INFYNION',
+      about_description: 'We are a premium digital agency specializing in crafting exceptional brand experiences. Our team of visionary designers and strategists transforms ideas into stunning visual realities that captivate audiences and drive results.',
+      contact_email: 'infynion01@gmail.com',
+      contact_phone: '+91 77360 38860',
+      instagram_handle: '@_infynion_',
+      ceo_name: 'ARFAN T S',
+      ceo_message: 'At INFYNION, we believe in the power of design to transform businesses and create lasting impact. Our commitment to excellence and innovation drives us to deliver solutions that not only meet but exceed expectations. We\'re not just creating designs—we\'re crafting experiences that inspire and connect.',
+      primary_color: '#00d4ff',
+      secondary_color: '#00ffcc',
+      accent_color: '#8b5cf6',
+      background_color: '#0a0a0f',
+      text_color: '#ffffff'
+    };
+
+    // Particle Animation
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationId;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function createParticles() {
+      particles = [];
+      const particleCount = Math.min(80, Math.floor(window.innerWidth / 15));
+      
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2 + 0.5,
+          speedX: (Math.random() - 0.5) * 0.5,
+          speedY: (Math.random() - 0.5) * 0.5,
+          opacity: Math.random() * 0.5 + 0.2
+        });
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach((particle, i) => {
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+        
+        if (particle.x < 0) particle.x = canvas.width;
+        if (particle.x > canvas.width) particle.x = 0;
+        if (particle.y < 0) particle.y = canvas.height;
+        if (particle.y > canvas.height) particle.y = 0;
+        
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 212, 255, ${particle.opacity})`;
+        ctx.fill();
+        
+        // Draw connections
+        particles.slice(i + 1).forEach(otherParticle => {
+          const dx = particle.x - otherParticle.x;
+          const dy = particle.y - otherParticle.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 120) {
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(otherParticle.x, otherParticle.y);
+            ctx.strokeStyle = `rgba(0, 212, 255, ${0.1 * (1 - distance / 120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        });
+      });
+      
+      animationId = requestAnimationFrame(animateParticles);
+    }
+
+    // Initialize particles
+    resizeCanvas();
+    createParticles();
+    animateParticles();
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createParticles();
+    });
+
+    // Scroll Reveal Animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section-reveal').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Mobile Menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+
+    function toggleMenu() {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      menuOverlay.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    menuOverlay.addEventListener('click', toggleMenu);
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggleMenu();
+      });
+    });
+
+    // Smooth Scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    
+
+    // 3D Tilt Effect for cards on desktop
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      document.querySelectorAll('.service-card, .glass-card, .team-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          const rotateX = (y - centerY) / 20;
+          const rotateY = (centerX - x) / 20;
+          
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+    }
+
+    // Parallax effect on scroll
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.pageYOffset;
+          
+          document.querySelectorAll('.floating').forEach(el => {
+            const speed = 0.05;
+            el.style.transform = `translateY(${scrolled * speed}px)`;
+          });
+          
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Element SDK Integration
+    async function onConfigChange(config) {
+      // Update hero section
+      const heroTitle = document.getElementById('hero-title');
+      const heroTagline = document.getElementById('hero-tagline');
+      const navLogo = document.getElementById('nav-logo');
+      
+      if (heroTitle) heroTitle.textContent = config.hero_title || defaultConfig.hero_title;
+      if (heroTagline) heroTagline.textContent = config.hero_tagline || defaultConfig.hero_tagline;
+      if (navLogo) navLogo.textContent = config.hero_title || defaultConfig.hero_title;
+      
+      // Update about section
+      const aboutTitle = document.getElementById('about-title');
+      const aboutDescription = document.getElementById('about-description');
+      
+      if (aboutTitle) aboutTitle.textContent = config.about_title || defaultConfig.about_title;
+      if (aboutDescription) aboutDescription.textContent = config.about_description || defaultConfig.about_description;
+      
+      // Update contact section
+      const contactEmail = document.getElementById('contact-email');
+      const contactPhone = document.getElementById('contact-phone');
+      const instagramHandle = document.getElementById('instagram-handle');
+      
+      if (contactEmail) contactEmail.textContent = config.contact_email || defaultConfig.contact_email;
+      if (contactPhone) contactPhone.textContent = config.contact_phone || defaultConfig.contact_phone;
+      if (instagramHandle) instagramHandle.textContent = config.instagram_handle || defaultConfig.instagram_handle;
+      
+      // Update CEO section
+      const ceoName = document.getElementById('ceo-name');
+      const ceoMessage = document.getElementById('ceo-message');
+      
+      if (ceoName) ceoName.textContent = config.ceo_name || defaultConfig.ceo_name;
+      if (ceoMessage) ceoMessage.textContent = config.ceo_message || defaultConfig.ceo_message;
+      
+      // Update colors
+      const primaryColor = config.primary_color || defaultConfig.primary_color;
+      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      
+      document.documentElement.style.setProperty('--neon-blue', primaryColor);
+      document.documentElement.style.setProperty('--neon-cyan', secondaryColor);
+      document.documentElement.style.setProperty('--neon-purple', accentColor);
+      document.documentElement.style.setProperty('--bg-primary', backgroundColor);
+      document.documentElement.style.setProperty('--text-white', textColor);
+      
+      document.body.style.backgroundColor = backgroundColor;
+      document.body.style.color = textColor;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              config.secondary_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ secondary_color: value });
+            }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              config.accent_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ accent_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['hero_title', config.hero_title || defaultConfig.hero_title],
+        ['hero_tagline', config.hero_tagline || defaultConfig.hero_tagline],
+        ['about_title', config.about_title || defaultConfig.about_title],
+        ['about_description', config.about_description || defaultConfig.about_description],
+        ['contact_email', config.contact_email || defaultConfig.contact_email],
+        ['contact_phone', config.contact_phone || defaultConfig.contact_phone],
+        ['instagram_handle', config.instagram_handle || defaultConfig.instagram_handle],
+        ['ceo_name', config.ceo_name || defaultConfig.ceo_name],
+        ['ceo_message', config.ceo_message || defaultConfig.ceo_message]
+      ]);
+    }
+
+    // Initialize SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    } else {
+      // Fallback: apply default config
+      onConfigChange(defaultConfig);
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bbcba83342f3d26',t:'MTc2ODA1MzkxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+ <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<!-- EmailJS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // ✅ Initialize EmailJS
+  emailjs.init("a4PrR93Yi8Y1joZ1i"); 
+  // ↑ EmailJS Dashboard → Account → API Keys → Public Key
+
+  const contactForm = document.getElementById("contactForm");
+  const toast = document.getElementById("toast");
+
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      "service_infynion01", // Email Services → Service ID
+      "template_1qoq2fr", // Email Templates → Template ID
+      this
+    )
+    .then(function () {
+      // ✅ SUCCESS
+      toast.style.opacity = "1";
+      toast.style.transform = "translateX(-50%) translateY(0)";
+      contactForm.reset();
+
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateX(-50%) translateY(20px)";
+      }, 3000);
+    })
+    .catch(function (error) {
+      // ❌ ERROR
+      console.error("EmailJS Error:", error);
+      alert("Email failed. Check console.");
+    });
+  });
+
+});
+</script>
+
+ </body>
+</html>
