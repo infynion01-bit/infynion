@@ -1,8 +1,0 @@
-{
-  "name": "infynion",
-  "version": "1.0.0",
-  "private": true,
-  "devDependencies": {
-    "tailwindcss": "^3.4.0"
-  }
-}
